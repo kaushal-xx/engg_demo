@@ -1,0 +1,33 @@
+<div class="page-header">
+  <% if can? :new, SecretCode%>
+    <%= link_to new_secret_code_path, class: 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      Generate Secret codes
+    <% end %>
+  <% end %>
+  <h1>Listing secret_codes</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Code</th>
+            <th>User</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @secret_codes) do |secret_code| %>
+            <td><%= secret_code.code %></td>
+            <td><%= secret_code.user.try(:email) %></td>
+            <td><%= link_to 'Show', secret_code %></td>
+        <td><%= link_to 'Edit', edit_secret_code_path(secret_code) %></td>
+        <td><%= link_to 'Destroy', secret_code, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
